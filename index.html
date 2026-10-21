@@ -4,10 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>AI & 머신러닝 종합 핵심 개념 & 중간고사 가이드</title>
-    <!-- KaTeX CSS & JS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+    
+    <!-- 수식 라이브러리: MathJax 3 ([ ], \( \) 자동 파싱 최적화) -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['[', ']']],
+                processEscapes: true
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
     <style>
         :root {
             --primary: #1a73e8;
@@ -606,29 +618,6 @@
     </div>
 
     <script>
-        function renderAllMath() {
-            if (typeof renderMathInElement === "function") {
-                renderMathInElement(document.body, {
-                    delimiters: [
-                        {left: '$$', right: '$$', display: true},
-                        {left: '[', right: ']', display: true},
-                        {left: '\\(', right: '\\)', display: false},
-                        {left: '$', right: '$', display: false}
-                    ],
-                    throwOnError: false
-                });
-            }
-        }
-
-        document.addEventListener("DOMContentLoaded", function() {
-            renderAllMath();
-        });
-
-        // 스크립트 지연 로드 대비 보조 실행
-        window.addEventListener("load", function() {
-            renderAllMath();
-        });
-
         function openTab(evt, tabName) {
             var i, tabcontent, tablinks;
             tabcontent = document.getElementsByClassName("tabcontent");
@@ -644,8 +633,10 @@
             currentTab.style.display = "block";
             evt.currentTarget.className += " active";
             
-            // 탭 전환 시 새로 표시된 요소 수식 렌더링
-            renderAllMath();
+            // 탭 열릴 때 숨겨져 있던 수식 렌더링 동기화
+            if (window.MathJax && window.MathJax.typesetPromise) {
+                window.MathJax.typesetPromise([currentTab]);
+            }
 
             window.scrollTo({
                 top: 0,
