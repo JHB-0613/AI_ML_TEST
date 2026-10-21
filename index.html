@@ -5,17 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>AI & 머신러닝 종합 핵심 개념 & 중간고사 가이드</title>
     <link rel="icon" href="data:,">
-    <!-- KaTeX 수식 라이브러리 -->
+    <!-- KaTeX 수식 라이브러리 (defer 제거 및 순서 보장) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+
     <script>
         function renderMath(targetElement) {
             if (typeof renderMathInElement === 'function') {
                 renderMathInElement(targetElement || document.body, {
                     delimiters: [
                         {left: '$$', right: '$$', display: true},
-                        {left: '[', right: ']', display: true},
+                        {left: '\\[', right: '\\]', display: true},
                         {left: '\\(', right: '\\)', display: false},
                         {left: '$', right: '$', display: false}
                     ],
@@ -24,8 +25,8 @@
             }
         }
 
-        // DOM 및 KaTeX 로드 완료 후 전체 수식 1차 렌더링
-        window.addEventListener('load', function() {
+        // 문서 준비 즉시 실행
+        document.addEventListener('DOMContentLoaded', function() {
             renderMath(document.body);
         });
     </script>
