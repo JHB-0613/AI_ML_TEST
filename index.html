@@ -51,7 +51,7 @@
             word-break: keep-all;
         }
         
-        /* 탭 네비게이션: 모바일에서 가로 스크롤로 매끄럽게 넘어가도록 구현 */
+        /* 탭 네비게이션: 모바일 가로 스크롤 */
         .nav-tabs-wrapper {
             position: sticky;
             top: 0;
@@ -69,10 +69,10 @@
             gap: 8px; 
             padding: 4px; 
             -webkit-overflow-scrolling: touch;
-            scrollbar-width: none; /* Firefox */
+            scrollbar-width: none;
         }
         .nav-tabs::-webkit-scrollbar {
-            display: none; /* Chrome, Safari */
+            display: none;
         }
 
         .tabbtn { 
@@ -99,7 +99,7 @@
             box-shadow: 0 2px 6px rgba(26,115,232,0.35); 
         }
 
-        /* 탭 콘텐츠 영역 */
+        /* 탭 콘텐츠 */
         .tabcontent { 
             display: none; 
             background: var(--card-bg); 
@@ -140,7 +140,6 @@
             color: var(--primary); 
         }
         
-        /* 모바일에서 수식 박스가 깨지지 않고 가로 스크롤되도록 설정 */
         .formula-box { 
             background: #f8fafd; 
             border: 1px solid #d2e3fc; 
@@ -170,33 +169,45 @@
             word-break: keep-all;
         }
         
-        /* 모바일 테이블 대응: 테이블 전용 스크롤 래퍼 */
+        /* 모바일 테이블 세로 1자 쪼개짐 완벽 방지 스타일 */
         .table-wrapper {
             width: 100%;
             overflow-x: auto;
             -webkit-overflow-scrolling: touch;
             margin: 16px 0;
-            border-radius: 6px;
+            border-radius: 8px;
             border: 1px solid var(--border-color);
+            background: #ffffff;
         }
         table { 
             width: 100%; 
             border-collapse: collapse; 
             font-size: 0.88em; 
-            min-width: 500px; /* 테이블이 너무 찌그러지는 현상 방지 */
+            min-width: 620px; /* 테이블 최소 너비를 확보하여 열 압축 방지 */
+            table-layout: auto;
         }
         th, td { 
             border: 1px solid var(--border-color); 
-            padding: 10px 12px; 
+            padding: 12px 14px; 
             text-align: left; 
+            vertical-align: middle;
+            word-break: keep-all; /* 단어가 세로로 쪼개지는 것 차단 */
+            line-height: 1.5;
         }
         th { 
             background-color: #f1f3f4; 
             color: var(--text-main); 
-            font-weight: 600;
+            font-weight: 700;
+            white-space: nowrap; /* 헤더 텍스트 1줄 유지 */
         }
         tr:nth-child(even) { 
             background-color: #f8f9fa; 
+        }
+
+        /* 첫 번째 열 강조 */
+        td:first-child {
+            font-weight: 600;
+            white-space: nowrap;
         }
         
         code { 
@@ -208,7 +219,7 @@
             font-family: Consolas, monospace; 
         }
 
-        /* 스마트폰 화면 최적화 미디어 쿼리 */
+        /* 스마트폰 화면 최적화 */
         @media (max-width: 600px) {
             body { 
                 padding: 12px 10px; 
@@ -270,15 +281,15 @@
             <table>
                 <thead>
                     <tr>
-                        <th>학습 패러다임</th>
-                        <th>제공 데이터 구성</th>
-                        <th>핵심 학습 목표</th>
-                        <th>대표 작업 / 응용</th>
+                        <th style="width: 18%;">학습 패러다임</th>
+                        <th style="width: 25%;">제공 데이터 구성</th>
+                        <th style="width: 27%;">핵심 학습 목표</th>
+                        <th style="width: 30%;">대표 작업 / 응용</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td><strong>지도학습 (Supervised)</strong></td>
+                        <td>지도학습 (Supervised)</td>
                         <td>입력 데이터 \(\mathbf{x}\) + <strong>정답 레이블 \(y\)</strong></td>
                         <td>입력에서 출력으로의 매핑 함수 \(f(\mathbf{x}) \approx y\) 학습[span_5](start_span)[span_5](end_span)</td>
                         <td>
@@ -287,13 +298,13 @@
                         </td>
                     </tr>
                     <tr>
-                        <td><strong>비지도학습 (Unsupervised)</strong></td>
+                        <td>비지도학습 (Unsupervised)</td>
                         <td>정답 레이블 없음 (\(\mathbf{x}\)만 제공)</td>
                         <td>데이터의 내부 구조, 잠재적 패턴 및 분포 파악</td>
                         <td>군집화(Clustering), 차원 축소(PCA), 밀도 추정</td>
                     </tr>
                     <tr>
-                        <td><strong>강화학습 (Reinforcement)</strong></td>
+                        <td>강화학습 (Reinforcement)</td>
                         <td>환경 상태(\(S\)), 행동(\(A\)), 보상(\(R\))</td>
                         <td>시행착오를 거치며 <strong>누적 보상(Reward)을 최대화</strong>하는 정책(Policy) 최적화</td>
                         <td>게임 AI (AlphaGo), 자율주행 제어</td>
@@ -332,27 +343,27 @@
             <table>
                 <thead>
                     <tr>
-                        <th>방식</th>
-                        <th>1회 갱신 시 사용하는 데이터</th>
-                        <th>장점</th>
-                        <th>단점</th>
+                        <th style="width: 25%;">방식</th>
+                        <th style="width: 25%;">1회 갱신 시 데이터</th>
+                        <th style="width: 25%;">장점</th>
+                        <th style="width: 25%;">단점</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td><strong>배치 경사하강법 (BGD)</strong></td>
+                        <td>배치 경사하강법 (BGD)</td>
                         <td>전체 훈련 데이터셋 전부</td>
                         <td>기울기 방향이 정확하고 안정적으로 수렴</td>
                         <td>계산 시간 및 메모리 소모 극심, 속도 느림</td>
                     </tr>
                     <tr>
-                        <td><strong>확률적 경사하강법 (SGD)</strong></td>
+                        <td>확률적 경사하강법 (SGD)</td>
                         <td>무작위 데이터 <strong>단 1개</strong></td>
                         <td>속도가 매우 빠르고 Local Minima 탈출에 유리</td>
                         <td>기울기 진동(Noise)이 심해 정확한 수렴 어려움</td>
                     </tr>
                     <tr>
-                        <td><strong>미니배치 (Mini-batch GD)</strong></td>
+                        <td>미니배치 (Mini-batch GD)</td>
                         <td>일정 크기의 묶음 (예: 32, 64, 128개)</td>
                         <td>GPU 병렬 처리 최적화, 속도와 안정성의 완벽한 절충</td>
                         <td>배치 크기(Batch Size) 하이퍼파라미터 튜닝 필요</td>
@@ -404,41 +415,41 @@
             <table>
                 <thead>
                     <tr>
-                        <th>함수명</th>
-                        <th>수식 \(f(z)\)</th>
-                        <th>출력 범위</th>
-                        <th>장단점 및 특성</th>
+                        <th style="width: 22%;">함수명</th>
+                        <th style="width: 20%;">수식 \(f(z)\)</th>
+                        <th style="width: 18%;">출력 범위</th>
+                        <th style="width: 40%;">장단점 및 특성</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td><strong>항등함수 (Identity)</strong></td>
+                        <td>항등함수 (Identity)</td>
                         <td>\(f(z) = z\)</td>
                         <td>\((-\infty, \infty)\)</td>
                         <td>미분값이 항상 1 (\(f'=1\)). 과제 7~9번 손계산 문제의 활성화 함수로 채택[span_22](start_span)[span_22](end_span).</td>
                     </tr>
                     <tr>
-                        <td><strong>Sigmoid</strong></td>
+                        <td>Sigmoid</td>
                         <td>\(\frac{1}{1 + e^{-z}}\)</td>
                         <td>\((0, 1)\)</td>
                         <td>이진 분류 출력층에 필수적이나, \(\vert{}z\vert{}\)가 클 때 기울기가 0으로 수렴하는 <strong>기울기 소실(Vanishing Gradient)</strong> 유발[span_23](start_span)[span_23](end_span).</td>
                     </tr>
                     <tr>
-                        <td><strong>Tanh</strong></td>
+                        <td>Tanh</td>
                         <td>\(\frac{e^z - e^{-z}}{e^z + e^{-z}}\)</td>
                         <td>\((-1, 1)\)</td>
                         <td>원점(0) 중심 대칭이라 Sigmoid보다 학습 수렴이 우수하나 여전히 깊은 층에서 기울기 소실 존재[span_24](start_span)[span_24](end_span).</td>
                     </tr>
                     <tr>
-                        <td><strong>ReLU</strong></td>
+                        <td>ReLU</td>
                         <td>\(\max(0, z)\)</td>
                         <td>\([0, \infty)\)</td>
                         <td>\(z>0\)에서 미분값이 1로 유지되어 <strong>기울기 소실 문제를 극복</strong>, 연산 속도가 매우 빨라 은닉층의 표준으로 채택[span_25](start_span)[span_25](end_span).</td>
                     </tr>
                     <tr>
-                        <td><strong>Softmax</strong></td>
+                        <td>Softmax</td>
                         <td>\(\frac{e^{z_k}}{\sum_{j} e^{z_j}}\)</td>
-                        <td>\((0, 1)\), 총합 1</td>
+                        <td>\((0, 1)\), 합 1</td>
                         <td><strong>다중 클래스 분류의 최종 출력층</strong>에서 각 클래스에 대한 예측 확률 분포를 생성[span_26](start_span)[span_26](end_span).</td>
                     </tr>
                 </tbody>
@@ -497,37 +508,37 @@
             <table>
                 <thead>
                     <tr>
-                        <th>레이어 모듈</th>
-                        <th>파라미터 수 공식</th>
-                        <th>해설 및 예시</th>
+                        <th style="width: 25%;">레이어 모듈</th>
+                        <th style="width: 35%;">파라미터 수 공식</th>
+                        <th style="width: 40%;">해설 및 예시</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td><strong><code>nn.Linear(in, out)</code></strong></td>
+                        <td><code>nn.Linear(in, out)</code></td>
                         <td><code>(in × out) + out</code></td>
                         <td>
                             • 가중치: \(\text{in} \times \text{out}\)<br>
                             • 편향: 출력 노드당 1개씩 총 \(\text{out}\)개[span_38](start_span)[span_38](end_span)<br>
-                            예: <code>Linear(64, 6)</code> \(\rightarrow (64 \times 6) + 6 = 390\)개[span_39](start_span)[span_39](end_span)
+                            예: <code>Linear(64, 6)</code> \(\rightarrow 390\)개[span_39](start_span)[span_39](end_span)
                         </td>
                     </tr>
                     <tr>
-                        <td><strong><code>nn.Conv2d(C_in, C_out, K)</code></strong></td>
+                        <td><code>nn.Conv2d(C_in, C_out, K)</code></td>
                         <td><code>C_out × (C_in × K_h × K_w + 1)</code></td>
                         <td>
-                            • 필터 1개가 입력 채널 전체(\(C_{\text{in}}\))를 동시에 처리<br>
+                            • 필터 1개가 입력 채널 전체(\(C_{\text{in}}\)) 처리<br>
                             • 필터 1개당 편향 1개 추가[span_40](start_span)[span_40](end_span)<br>
-                            예: <code>Conv2d(1, 4, 3)</code> \(\rightarrow 4 \times (1 \times 3 \times 3 + 1) = 40\)개[span_41](start_span)[span_41](end_span)
+                            예: <code>Conv2d(1, 4, 3)</code> \(\rightarrow 40\)개[span_41](start_span)[span_41](end_span)
                         </td>
                     </tr>
                     <tr>
-                        <td><strong><code>nn.MaxPool2d / AvgPool2d</code></strong></td>
+                        <td><code>nn.MaxPool2d / AvgPool2d</code></td>
                         <td><strong>0 개</strong></td>
-                        <td>정해진 수학적 연산(최댓값/평균값)만 수행하므로 가중치나 편향이 없음[span_42](start_span)[span_42](end_span)</td>
+                        <td>단순 최댓값/평균값 추출 연산으로 파라미터 없음[span_42](start_span)[span_42](end_span)</td>
                     </tr>
                     <tr>
-                        <td><strong><code>nn.Flatten / nn.ReLU</code></strong></td>
+                        <td><code>nn.Flatten / nn.ReLU</code></td>
                         <td><strong>0 개</strong></td>
                         <td>텐서 차원 변경 및 활성화 연산만 수행하므로 파라미터 없음[span_43](start_span)[span_43](end_span)</td>
                     </tr>
@@ -568,34 +579,34 @@
             <table>
                 <thead>
                     <tr>
-                        <th>유형</th>
-                        <th>과제 문항</th>
-                        <th>핵심 풀이 요령 및 체크포인트</th>
+                        <th style="width: 25%;">유형</th>
+                        <th style="width: 18%;">과제 문항</th>
+                        <th style="width: 57%;">핵심 풀이 요령 및 체크포인트</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td><strong>1. 개념 서술/비교</strong></td>
+                        <td>1. 개념 서술/비교</td>
                         <td>1 ~ 3번</td>
                         <td>규칙 기반 vs ML vs DL 특징, 지도/비지도/강화학습 차이 명확히 숙지[span_49](start_span)[span_49](end_span)</td>
                     </tr>
                     <tr>
-                        <td><strong>2. 선형회귀 1회 업데이트</strong></td>
+                        <td>2. 선형회귀 1회 업데이트</td>
                         <td>4 ~ 6번</td>
                         <td>순전파 \(\hat{y} = wx + b\) \(\rightarrow\) \(\frac{\partial L}{\partial w} = 2(\hat{y}-t)x\) \(\rightarrow\) \(w - \eta \frac{\partial L}{\partial w}\) 순서로 풀이[span_50](start_span)[span_50](end_span)</td>
                     </tr>
                     <tr>
-                        <td><strong>3. 2-2-2 MLP 역전파 손계산</strong></td>
+                        <td>3. 2-2-2 MLP 역전파 손계산</td>
                         <td>7 ~ 9번</td>
                         <td>은닉 노드 편미분 시 두 출력 노드의 오차 역전파 경로를 반드시 합산할 것[span_51](start_span)[span_51](end_span)</td>
                     </tr>
                     <tr>
-                        <td><strong>4. 파라미터 수 계산</strong></td>
+                        <td>4. 파라미터 수 계산</td>
                         <td>10 ~ 12번</td>
                         <td><code>bias=True</code> 조건 확인, <code>nn.Linear</code>는 \((\text{in}\times\text{out})+\text{out}\), <code>nn.Conv2d</code>는 \((K_h K_w C_{\text{in}} + 1) C_{\text{out}}\)[span_52](start_span)[span_52](end_span)</td>
                     </tr>
                     <tr>
-                        <td><strong>5. 2D CNN 합성곱 손계산</strong></td>
+                        <td>5. 2D CNN 합성곱 손계산</td>
                         <td>13 ~ 15번</td>
                         <td>커널을 뒤집지 않고 원소별 곱 후 합산, 마지막에 편향(\(b\)) 가산 잊지 말 것[span_53](start_span)[span_53](end_span)</td>
                     </tr>
@@ -619,7 +630,6 @@
             document.getElementById(tabName).style.display = "block";
             evt.currentTarget.className += " active";
             
-            // 모바일에서 탭 클릭 시 해당 콘텐츠 상단으로 부드럽게 스크롤
             window.scrollTo({
                 top: 0,
                 behavior: 'smooth'
