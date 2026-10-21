@@ -471,6 +471,53 @@
                 </tbody>
             </table>
         </div>
+
+        <!-- 4주차: 기울기 소실(Vanishing Gradient) 핵심 요약 -->
+        <h3>3) 기울기 소실(Vanishing Gradient) 핵심 요약</h3>
+        
+        <div class="concept-card">
+            <p><strong>1. 개념 정의</strong></p>
+            <ul>
+                <li>신경망이 깊어질수록 역전파(Backpropagation) 과정에서 앞쪽(입력층에 가까운) 계층으로 갈수록 계산되는 기울기(Gradient)가 0에 수렴하여 가중치(Weight)가 더 이상 업데이트되지 않고 학습이 멈추는 현상입니다.</li>
+            </ul>
+
+            <p style="margin-top: 16px;"><strong>2. 발생 원리 (수식과 연쇄법칙 관점)</strong></p>
+            <ol>
+                <li><strong>가중치 업데이트 공식:</strong>
+                    <div class="formula-box">
+                        $$w_{\text{new}} = w_{\text{old}} - \eta \cdot \frac{\partial L}{\partial w}$$
+                    </div>
+                    가중치를 수정하려면 뒤에 빼주는 값인 \((\text{학습률 } \eta \times \text{기울기})\)가 유의미한 크기를 가져야 합니다.
+                </li>
+                <li style="margin-top: 10px;"><strong>연쇄법칙(Chain Rule)에 의한 미분값 누적 곱:</strong>
+                    뒤쪽 출력층의 오차를 앞쪽 계층으로 전달할 때, 각 계층을 거치며 활성화 함수의 도함수(미분값, \(f'(z)\))가 계속 곱해집니다.
+                </li>
+                <li style="margin-top: 10px;"><strong>1 미만의 소수 곱셈에 의한 신호 소멸:</strong>
+                    <ul>
+                        <li>Sigmoid의 미분 최댓값은 \(0.25\)이며, 입력값의 절댓값이 커질수록 \(0\)에 수렴합니다.</li>
+                        <li>Tanh 역시 최댓값은 \(1.0\)이지만, 포화(Saturation) 구간에서는 미분값이 \(0\)에 가까워집니다.</li>
+                        <li>\(0.25\) 같은 1보다 작은 소수를 여러 층에 걸쳐 연속으로 곱하면 지수적으로 감소하여 결국 \(\frac{\partial L}{\partial w} \approx 0\)이 됩니다.</li>
+                        <li>결과적으로 빼줄 수정량(\(\eta \cdot \text{기울기}\))이 0이 되어 가중치가 초기값 그대로 굳어버립니다.</li>
+                    </ul>
+                </li>
+            </ol>
+
+            <p style="margin-top: 16px;"><strong>3. 심각한 문제점</strong></p>
+            <ul>
+                <li>딥러닝에서 앞쪽 계층은 선, 점, 에지 등 가장 기초적이고 중요한 데이터의 특징(Low-level Feature)을 학습하는 역할을 맡습니다.</li>
+                <li>기울기 소실이 발생하면 뒤쪽 계층만 미세하게 수정되고 기초를 다지는 앞쪽 계층은 전혀 학습하지 못하므로, 신경망을 깊게 쌓는 의미가 사라지고 모델 전체의 성능이 심각하게 저하됩니다.</li>
+            </ul>
+
+            <p style="margin-top: 16px;"><strong>4. 주요 해결 방법</strong></p>
+            <ul>
+                <li><strong>ReLU 활성화 함수 도입 (\(f(z) = \max(0, z)\)):</strong>
+                    <ul>
+                        <li>입력이 양수(\(z > 0\))인 구간에서 미분값이 정확히 1입니다.</li>
+                        <li>\(1\)은 수십 번을 곱해도 줄어들지 않으므로, 신호가 감쇠 없이 맨 앞쪽 층까지 온전히 전달됩니다.</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
     </div>
 
     <!-- 5주차 -->
