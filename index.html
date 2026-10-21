@@ -51,7 +51,6 @@
             word-break: keep-all;
         }
         
-        /* 탭 네비게이션: 모바일 가로 스크롤 */
         .nav-tabs-wrapper {
             position: sticky;
             top: 0;
@@ -99,7 +98,6 @@
             box-shadow: 0 2px 6px rgba(26,115,232,0.35); 
         }
 
-        /* 탭 콘텐츠 */
         .tabcontent { 
             display: none; 
             background: var(--card-bg); 
@@ -169,7 +167,7 @@
             word-break: keep-all;
         }
         
-        /* 모바일 테이블 세로 1자 쪼개짐 완벽 방지 스타일 */
+        /* 테이블 세로 분절 방지 최적화 */
         .table-wrapper {
             width: 100%;
             overflow-x: auto;
@@ -183,7 +181,7 @@
             width: 100%; 
             border-collapse: collapse; 
             font-size: 0.88em; 
-            min-width: 620px; /* 테이블 최소 너비를 확보하여 열 압축 방지 */
+            min-width: 680px; /* 전체 최소 너비 확장 */
             table-layout: auto;
         }
         th, td { 
@@ -191,23 +189,25 @@
             padding: 12px 14px; 
             text-align: left; 
             vertical-align: middle;
-            word-break: keep-all; /* 단어가 세로로 쪼개지는 것 차단 */
+            word-break: keep-all;
             line-height: 1.5;
+            min-width: 130px; /* 셀별 최소 너비 보장: 1자 압축 차단 */
         }
         th { 
             background-color: #f1f3f4; 
             color: var(--text-main); 
             font-weight: 700;
-            white-space: nowrap; /* 헤더 텍스트 1줄 유지 */
+            white-space: nowrap; 
         }
         tr:nth-child(even) { 
             background-color: #f8f9fa; 
         }
 
-        /* 첫 번째 열 강조 */
+        /* 1열 및 핵심 설명 열 너비 균형 조정 */
         td:first-child {
             font-weight: 600;
             white-space: nowrap;
+            min-width: 140px;
         }
         
         code { 
@@ -219,7 +219,6 @@
             font-family: Consolas, monospace; 
         }
 
-        /* 스마트폰 화면 최적화 */
         @media (max-width: 600px) {
             body { 
                 padding: 12px 10px; 
@@ -250,7 +249,6 @@
 
     <h1>AI & 머신러닝 종합 요약 & 중간고사 가이드</h1>
 
-    <!-- 상단 주차 선택 버튼 (가로 스크롤 네비게이션) -->
     <div class="nav-tabs-wrapper">
         <div class="nav-tabs">
             <button class="tabbtn active" onclick="openTab(event, 'week1')">1주: AI·ML 개요</button>
@@ -270,9 +268,9 @@
         <h3>1) AI vs 머신러닝(ML) vs 딥러닝(DL)</h3>
         <div class="concept-card">
             <ul>
-                <li><strong>규칙 기반 시스템 (Rule-based AI):</strong> 인간 전문가가 데이터의 논리 규칙(if-then)과 조건을 명시적으로 직접 코딩합니다. 데이터로부터 가중치를 스스로 갱신하는 학습 과정이 없습니다[span_2](start_span)[span_2](end_span).</li>
-                <li><strong>머신러닝 (Machine Learning):</strong> 규칙을 직접 정의하지 않고, 대량의 데이터로부터 컴퓨터가 알고리즘을 통해 데이터의 규칙과 내부 파라미터(\(\mathbf{w}, b\))를 스스로 학습합니다[span_3](start_span)[span_3](end_span).</li>
-                <li><strong>딥러닝 (Deep Learning):</strong> 머신러닝의 하위 분야로, 다층 인공신경망(ANN)을 기반으로 원시 데이터로부터 유의미한 특징(Feature Representation)을 계층적으로 자동 추출합니다[span_4](start_span)[span_4](end_span).</li>
+                <li><strong>규칙 기반 시스템 (Rule-based AI):</strong> 인간 전문가가 데이터의 논리 규칙(if-then)과 조건을 명시적으로 직접 코딩합니다. 데이터로부터 가중치를 스스로 갱신하는 학습 과정이 없습니다.</li>
+                <li><strong>머신러닝 (Machine Learning):</strong> 규칙을 직접 정의하지 않고, 대량의 데이터로부터 컴퓨터가 알고리즘을 통해 데이터의 규칙과 내부 파라미터(\(\mathbf{w}, b\))를 스스로 학습합니다.</li>
+                <li><strong>딥러닝 (Deep Learning):</strong> 머신러닝의 하위 분야로, 다층 인공신경망(ANN)을 기반으로 원시 데이터로부터 유의미한 특징(Feature Representation)을 계층적으로 자동 추출합니다.</li>
             </ul>
         </div>
 
@@ -281,20 +279,20 @@
             <table>
                 <thead>
                     <tr>
-                        <th style="width: 18%;">학습 패러다임</th>
-                        <th style="width: 25%;">제공 데이터 구성</th>
-                        <th style="width: 27%;">핵심 학습 목표</th>
-                        <th style="width: 30%;">대표 작업 / 응용</th>
+                        <th style="min-width: 140px;">학습 패러다임</th>
+                        <th style="min-width: 160px;">제공 데이터 구성</th>
+                        <th style="min-width: 200px;">핵심 학습 목표</th>
+                        <th style="min-width: 220px;">대표 작업 / 응용</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td>지도학습 (Supervised)</td>
                         <td>입력 데이터 \(\mathbf{x}\) + <strong>정답 레이블 \(y\)</strong></td>
-                        <td>입력에서 출력으로의 매핑 함수 \(f(\mathbf{x}) \approx y\) 학습[span_5](start_span)[span_5](end_span)</td>
+                        <td>입력에서 출력으로의 매핑 함수 \(f(\mathbf{x}) \approx y\) 학습</td>
                         <td>
                             • <strong>회귀(Regression):</strong> 연속적 수치 예측 (주택가, 기온)<br>
-                            • <strong>분류(Classification):</strong> 이산적 클래스 예측 (숫자 0~9, 스팸 필터)[span_6](start_span)[span_6](end_span)
+                            • <strong>분류(Classification):</strong> 이산적 클래스 예측 (숫자 0~9, 스팸 필터)
                         </td>
                     </tr>
                     <tr>
@@ -320,22 +318,22 @@
         
         <h3>1) 선형 가설 함수 (Hypothesis Function)</h3>
         <ul>
-            <li><strong>단일 입력 변수 가설식:</strong> \(H(x) = wx + b\)[span_7](start_span)[span_7](end_span)</li>
+            <li><strong>단일 입력 변수 가설식:</strong> \(H(x) = wx + b\)</li>
             <li><strong>다변수 가설식 (행렬 내적 형태):</strong> \(\mathbf{x} = [x_1, x_2, \dots, x_d]^T\), \(\mathbf{w} = [w_1, w_2, \dots, w_d]^T\) 일 때,
-                \[H(\mathbf{x}) = \mathbf{w}^T \mathbf{x} + b = w_1 x_1 + w_2 x_2 + \dots + w_d x_d + b\][span_8](start_span)[span_8](end_span)
+                \[H(\mathbf{x}) = \mathbf{w}^T \mathbf{x} + b = w_1 x_1 + w_2 x_2 + \dots + w_d x_d + b\]
             </li>
         </ul>
 
         <h3>2) 비용 함수 (Cost Function): 평균 제곱 오차 (MSE)</h3>
-        <p>전체 데이터 수 \(n\)개에 대한 오차의 제곱 평균을 계산합니다[span_9](start_span)[span_9](end_span):</p>
+        <p>전체 데이터 수 \(n\)개에 대한 오차의 제곱 평균을 계산합니다:</p>
         <div class="formula-box">
-            \[\text{cost}(\mathbf{w}, b) = \frac{1}{n} \sum_{i=1}^{n} \left( y_i - H(\mathbf{x}_i) \right)^2 = \frac{1}{n} \sum_{i=1}^{n} \left( y_i - (\mathbf{w}^T \mathbf{x}_i + b) \right)^2\][span_10](start_span)[span_10](end_span)
+            \[\text{cost}(\mathbf{w}, b) = \frac{1}{n} \sum_{i=1}^{n} \left( y_i - H(\mathbf{x}_i) \right)^2 = \frac{1}{n} \sum_{i=1}^{n} \left( y_i - (\mathbf{w}^T \mathbf{x}_i + b) \right)^2\]
         </div>
 
         <h3>3) 경사하강법 (Gradient Descent) 원리 & 파라미터 업데이트</h3>
-        <p>손실 함수의 기울기(Gradient) 반대 방향으로 이동하여 최솟값을 탐색합니다 (\(\alpha\): 학습률, Learning Rate)[span_11](start_span)[span_11](end_span):</p>
+        <p>손실 함수의 기울기(Gradient) 반대 방향으로 이동하여 최솟값을 탐색합니다 (\(\alpha\): 학습률, Learning Rate):</p>
         <div class="formula-box">
-            \[w_j \leftarrow w_j - \alpha \frac{\partial \text{cost}(\mathbf{w}, b)}{\partial w_j}, \quad b \leftarrow b - \alpha \frac{\partial \text{cost}(\mathbf{w}, b)}{\partial b}\][span_12](start_span)[span_12](end_span)
+            \[w_j \leftarrow w_j - \alpha \frac{\partial \text{cost}(\mathbf{w}, b)}{\partial w_j}, \quad b \leftarrow b - \alpha \frac{\partial \text{cost}(\mathbf{w}, b)}{\partial b}\]
         </div>
 
         <h3>4) 경사하강법의 세부 방식 비교</h3>
@@ -343,10 +341,10 @@
             <table>
                 <thead>
                     <tr>
-                        <th style="width: 25%;">방식</th>
-                        <th style="width: 25%;">1회 갱신 시 데이터</th>
-                        <th style="width: 25%;">장점</th>
-                        <th style="width: 25%;">단점</th>
+                        <th style="min-width: 150px;">방식</th>
+                        <th style="min-width: 170px;">1회 갱신 시 데이터</th>
+                        <th style="min-width: 200px;">장점</th>
+                        <th style="min-width: 200px;">단점</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -378,24 +376,24 @@
         <h2>📌 3주차: 로지스틱 회귀 (Logistic Regression) & 손실함수</h2>
         
         <h3>1) 로지스틱 회귀와 시그모이드(Sigmoid) 함수</h3>
-        <p>선형 결합 \(z = \mathbf{w}^T \mathbf{x} + b\)의 연속적인 출력을 0과 1 사이의 확률값 \(P(y=1\vert{}\mathbf{x})\)으로 압축 변환합니다[span_13](start_span)[span_13](end_span):</p>
+        <p>선형 결합 \(z = \mathbf{w}^T \mathbf{x} + b\)의 연속적인 출력을 0과 1 사이의 확률값 \(P(y=1\vert{}\mathbf{x})\)으로 압축 변환합니다:</p>
         <div class="formula-box">
-            \[\sigma(z) = \frac{1}{1 + e^{-z}}, \quad H(\mathbf{x}) = \sigma(\mathbf{w}^T \mathbf{x} + b) = \frac{1}{1 + e^{-(\mathbf{w}^T \mathbf{x} + b)}}\][span_14](start_span)[span_14](end_span)
+            \[\sigma(z) = \frac{1}{1 + e^{-z}}, \quad H(\mathbf{x}) = \sigma(\mathbf{w}^T \mathbf{x} + b) = \frac{1}{1 + e^{-(\mathbf{w}^T \mathbf{x} + b)}}\]
         </div>
 
         <h3>2) 교차 엔트로피 손실 (Cross-Entropy Loss) 도입 이유</h3>
         <div class="concept-card">
             <ul>
-                <li><strong>MSE 적용 시 한계:</strong> 비선형 함수인 Sigmoid에 MSE를 결합하면 손실 곡면이 <strong>비볼록(Non-convex)</strong> 형태가 되어 수많은 Local Minima에 갇히게 됩니다[span_15](start_span)[span_15](end_span).</li>
-                <li><strong>교차 엔트로피(BCE) 도입:</strong> 손실 곡면을 <strong>볼록(Convex)</strong> 함수로 만들어 경사하강법 시 전역 최솟값(Global Minimum)으로의 안정적 수렴을 보장합니다[span_16](start_span)[span_16](end_span).</li>
+                <li><strong>MSE 적용 시 한계:</strong> 비선형 함수인 Sigmoid에 MSE를 결합하면 손실 곡면이 <strong>비볼록(Non-convex)</strong> 형태가 되어 수많은 Local Minima에 갇히게 됩니다.</li>
+                <li><strong>교차 엔트로피(BCE) 도입:</strong> 손실 곡면을 <strong>볼록(Convex)</strong> 함수로 만들어 경사하강법 시 전역 최솟값(Global Minimum)으로의 안정적 수렴을 보장합니다.</li>
             </ul>
         </div>
         <div class="formula-box">
             \[\text{cost}(\mathbf{w}, b) = -\frac{1}{n} \sum_{i=1}^{n} \Big[ y_i \log(H(\mathbf{x}_i)) + (1 - y_i) \log(1 - H(\mathbf{x}_i)) \Big]\]
         </div>
         <ul>
-            <li><strong>실제 정답 \(y = 1\) 일 때:</strong> 손실은 \(-\log(H(\mathbf{x}))\) \(\rightarrow\) 예측값 \(H\)가 1이면 손실 0, 0에 가까워지면 손실 무한대 폭증[span_17](start_span)[span_17](end_span)</li>
-            <li><strong>실제 정답 \(y = 0\) 일 때:</strong> 손실은 \(-\log(1 - H(\mathbf{x}))\) \(\rightarrow\) 예측값 \(H\)가 0이면 손실 0, 1에 가까워지면 손실 무한대 폭증[span_18](start_span)[span_18](end_span)</li>
+            <li><strong>실제 정답 \(y = 1\) 일 때:</strong> 손실은 \(-\log(H(\mathbf{x}))\) \(\rightarrow\) 예측값 \(H\)가 1이면 손실 0, 0에 가까워지면 손실 무한대 폭증</li>
+            <li><strong>실제 정답 \(y = 0\) 일 때:</strong> 손실은 \(-\log(1 - H(\mathbf{x}))\) \(\rightarrow\) 예측값 \(H\)가 0이면 손실 0, 1에 가까워지면 손실 무한대 폭증</li>
         </ul>
     </div>
 
@@ -404,10 +402,10 @@
         <h2>📌 4주차: 인공신경망(ANN) 기초 & 활성화 함수</h2>
         
         <h3>1) 뉴런의 연산 메커니즘 (Linear Combine + Activation)</h3>
-        <p>인공신경망의 각 뉴런은 항상 다음 2단계를 연속으로 수행합니다[span_19](start_span)[span_19](end_span):</p>
+        <p>인공신경망의 각 뉴런은 항상 다음 2단계를 연속으로 수행합니다:</p>
         <ol>
-            <li><strong>가중합 선형 변환:</strong> \(z = \mathbf{w}^T \mathbf{x} + b = \sum_{j} w_j x_j + b\)[span_20](start_span)[span_20](end_span)</li>
-            <li><strong>비선형 활성화 함수 통과:</strong> \(a = f(z)\) (신경망이 복잡한 비선형 결정 경계를 형성하게 만듦)[span_21](start_span)[span_21](end_span)</li>
+            <li><strong>가중합 선형 변환:</strong> \(z = \mathbf{w}^T \mathbf{x} + b = \sum_{j} w_j x_j + b\)</li>
+            <li><strong>비선형 활성화 함수 통과:</strong> \(a = f(z)\) (신경망이 복잡한 비선형 결정 경계를 형성하게 만듦)</li>
         </ol>
 
         <h3>2) 핵심 활성화 함수 비교 & 기울기 소실(Vanishing Gradient)</h3>
@@ -415,10 +413,10 @@
             <table>
                 <thead>
                     <tr>
-                        <th style="width: 22%;">함수명</th>
-                        <th style="width: 20%;">수식 \(f(z)\)</th>
-                        <th style="width: 18%;">출력 범위</th>
-                        <th style="width: 40%;">장단점 및 특성</th>
+                        <th style="min-width: 140px;">함수명</th>
+                        <th style="min-width: 140px;">수식 \(f(z)\)</th>
+                        <th style="min-width: 130px;">출력 범위</th>
+                        <th style="min-width: 240px;">장단점 및 특성</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -426,31 +424,31 @@
                         <td>항등함수 (Identity)</td>
                         <td>\(f(z) = z\)</td>
                         <td>\((-\infty, \infty)\)</td>
-                        <td>미분값이 항상 1 (\(f'=1\)). 과제 7~9번 손계산 문제의 활성화 함수로 채택[span_22](start_span)[span_22](end_span).</td>
+                        <td>미분값이 항상 1 (\(f'=1\)). 과제 7~9번 손계산 문제의 활성화 함수로 채택.</td>
                     </tr>
                     <tr>
                         <td>Sigmoid</td>
                         <td>\(\frac{1}{1 + e^{-z}}\)</td>
                         <td>\((0, 1)\)</td>
-                        <td>이진 분류 출력층에 필수적이나, \(\vert{}z\vert{}\)가 클 때 기울기가 0으로 수렴하는 <strong>기울기 소실(Vanishing Gradient)</strong> 유발[span_23](start_span)[span_23](end_span).</td>
+                        <td>이진 분류 출력층에 필수적이나, \(\vert{}z\vert{}\)가 클 때 기울기가 0으로 수렴하는 <strong>기울기 소실(Vanishing Gradient)</strong> 유발.</td>
                     </tr>
                     <tr>
                         <td>Tanh</td>
                         <td>\(\frac{e^z - e^{-z}}{e^z + e^{-z}}\)</td>
                         <td>\((-1, 1)\)</td>
-                        <td>원점(0) 중심 대칭이라 Sigmoid보다 학습 수렴이 우수하나 여전히 깊은 층에서 기울기 소실 존재[span_24](start_span)[span_24](end_span).</td>
+                        <td>원점(0) 중심 대칭이라 Sigmoid보다 학습 수렴이 우수하나 여전히 깊은 층에서 기울기 소실 존재.</td>
                     </tr>
                     <tr>
                         <td>ReLU</td>
                         <td>\(\max(0, z)\)</td>
                         <td>\([0, \infty)\)</td>
-                        <td>\(z>0\)에서 미분값이 1로 유지되어 <strong>기울기 소실 문제를 극복</strong>, 연산 속도가 매우 빨라 은닉층의 표준으로 채택[span_25](start_span)[span_25](end_span).</td>
+                        <td>\(z>0\)에서 미분값이 1로 유지되어 <strong>기울기 소실 문제를 극복</strong>, 연산 속도가 매우 빨라 은닉층의 표준으로 채택.</td>
                     </tr>
                     <tr>
                         <td>Softmax</td>
                         <td>\(\frac{e^{z_k}}{\sum_{j} e^{z_j}}\)</td>
                         <td>\((0, 1)\), 합 1</td>
-                        <td><strong>다중 클래스 분류의 최종 출력층</strong>에서 각 클래스에 대한 예측 확률 분포를 생성[span_26](start_span)[span_26](end_span).</td>
+                        <td><strong>다중 클래스 분류의 최종 출력층</strong>에서 각 클래스에 대한 예측 확률 분포를 생성.</td>
                     </tr>
                 </tbody>
             </table>
@@ -463,28 +461,28 @@
         
         <h3>1) 2-2-2 MLP 기본 세팅</h3>
         <ul>
-            <li><strong>입력:</strong> \(x_1, x_2\) | <strong>은닉 노드:</strong> \(h_1, h_2\) | <strong>출력 노드:</strong> \(y_1, y_2\) | <strong>정답:</strong> \(t_1, t_2\)[span_27](start_span)[span_27](end_span)</li>
-            <li><strong>손실함수:</strong> \(L = \frac{1}{2} \left[ (y_1 - t_1)^2 + (y_2 - t_2)^2 \right]\)[span_28](start_span)[span_28](end_span)</li>
-            <li><strong>손실 편미분:</strong> \(\frac{\partial L}{\partial y_1} = (y_1 - t_1), \quad \frac{\partial L}{\partial y_2} = (y_2 - t_2)\)[span_29](start_span)[span_29](end_span)</li>
-            <li><strong>항등 활성화 함수 전제:</strong> \(f(z) = z \implies f'(z) = 1\)[span_30](start_span)[span_30](end_span)</li>
+            <li><strong>입력:</strong> \(x_1, x_2\) | <strong>은닉 노드:</strong> \(h_1, h_2\) | <strong>출력 노드:</strong> \(y_1, y_2\) | <strong>정답:</strong> \(t_1, t_2\)</li>
+            <li><strong>손실함수:</strong> \(L = \frac{1}{2} \left[ (y_1 - t_1)^2 + (y_2 - t_2)^2 \right]\)</li>
+            <li><strong>손실 편미분:</strong> \(\frac{\partial L}{\partial y_1} = (y_1 - t_1), \quad \frac{\partial L}{\partial y_2} = (y_2 - t_2)\)</li>
+            <li><strong>항등 활성화 함수 전제:</strong> \(f(z) = z \implies f'(z) = 1\)</li>
         </ul>
 
         <h3>2) 역전파 연쇄법칙(Chain Rule) 2대 유형</h3>
         
         <div class="concept-card">
             <p><strong>유형 1: 출력층 가중치 편미분 (예: \(w_{35}\))</strong></p>
-            <p>\(w_{35}\)는 출력 노드 \(y_1\) 하나로만 연결되므로 직렬 연쇄법칙을 적용합니다[span_31](start_span)[span_31](end_span):</p>
+            <p>\(w_{35}\)는 출력 노드 \(y_1\) 하나로만 연결되므로 직렬 연쇄법칙을 적용합니다:</p>
             <div class="formula-box">
-                \[\frac{\partial L}{\partial w_{35}} = \frac{\partial L}{\partial y_1} \cdot \frac{\partial y_1}{\partial z_3} \cdot \frac{\partial z_3}{\partial w_{35}} = (y_1 - t_1) \cdot 1 \cdot h_1\][span_32](start_span)[span_32](end_span)
+                \[\frac{\partial L}{\partial w_{35}} = \frac{\partial L}{\partial y_1} \cdot \frac{\partial y_1}{\partial z_3} \cdot \frac{\partial z_3}{\partial w_{35}} = (y_1 - t_1) \cdot 1 \cdot h_1\]
             </div>
         </div>
 
         <div class="concept-card">
             <p><strong>유형 2: 은닉층 가중치 편미분 (예: \(w_{13}\) 또는 \(w_{23}\)) - 합산 경로</strong></p>
-            <p>은닉 노드 \(h_1\)은 순전파 시 출력 노드 \(y_1\)과 \(y_2\) 양쪽으로 분기하므로, 역전파 시 <strong>두 출력 노드에서 되돌아오는 오차 기울기를 반드시 합산</strong>해야 합니다[span_33](start_span)[span_33](end_span):</p>
+            <p>은닉 노드 \(h_1\)은 순전파 시 출력 노드 \(y_1\)과 \(y_2\) 양쪽으로 분기하므로, 역전파 시 <strong>두 출력 노드에서 되돌아오는 오차 기울기를 반드시 합산</strong>해야 합니다:</p>
             <div class="formula-box">
-                \[\frac{\partial L}{\partial w_{13}} = \frac{\partial L}{\partial h_1} \cdot \frac{\partial h_1}{\partial z_1} \cdot \frac{\partial z_1}{\partial w_{13}} = \left( \frac{\partial L}{\partial h_1} \right) \cdot 1 \cdot x_1\][span_34](start_span)[span_34](end_span)
-                \[\text{단, } \frac{\partial L}{\partial h_1} = \underbrace{\left( \frac{\partial L}{\partial y_1} \cdot 1 \cdot w_{35} \right)}_{y_1 \text{을 거친 역전파}} + \underbrace{\left( \frac{\partial L}{\partial y_2} \cdot 1 \cdot w_{36} \right)}_{y_2 \text{를 거친 역전파}}\][span_35](start_span)[span_35](end_span)
+                \[\frac{\partial L}{\partial w_{13}} = \frac{\partial L}{\partial h_1} \cdot \frac{\partial h_1}{\partial z_1} \cdot \frac{\partial z_1}{\partial w_{13}} = \left( \frac{\partial L}{\partial h_1} \right) \cdot 1 \cdot x_1\]
+                \[\text{단, } \frac{\partial L}{\partial h_1} = \underbrace{\left( \frac{\partial L}{\partial y_1} \cdot 1 \cdot w_{35} \right)}_{y_1 \text{을 거친 역전파}} + \underbrace{\left( \frac{\partial L}{\partial y_2} \cdot 1 \cdot w_{36} \right)}_{y_2 \text{를 거친 역전파}}\]
             </div>
         </div>
     </div>
@@ -495,10 +493,10 @@
         
         <h3>1) CNN 커널 연산 및 Feature Map 크기 공식</h3>
         <ul>
-            <li><strong>Cross-Correlation:</strong> 딥러닝에서는 커널을 180도 뒤집지 않고 원본 커널과 수용영역의 원소별 곱(Element-wise)의 합산에 편향 \(b\)를 가산합니다[span_36](start_span)[span_36](end_span).</li>
+            <li><strong>Cross-Correlation:</strong> 딥러닝에서는 커널을 180도 뒤집지 않고 원본 커널과 수용영역의 원소별 곱(Element-wise)의 합산에 편향 \(b\)를 가산합니다.</li>
             <li><strong>출력 Feature Map Shape 계산:</strong>
                 <div class="formula-box">
-                    \[H_{\text{out}} = \left\lfloor \frac{H_{\text{in}} - K_h + 2P}{S} \right\rfloor + 1, \quad W_{\text{out}} = \left\lfloor \frac{W_{\text{in}} - K_w + 2P}{S} \right\rfloor + 1\][span_37](start_span)[span_37](end_span)
+                    \[H_{\text{out}} = \left\lfloor \frac{H_{\text{in}} - K_h + 2P}{S} \right\rfloor + 1, \quad W_{\text{out}} = \left\lfloor \frac{W_{\text{in}} - K_w + 2P}{S} \right\rfloor + 1\]
                 </div>
             </li>
         </ul>
@@ -508,9 +506,9 @@
             <table>
                 <thead>
                     <tr>
-                        <th style="width: 25%;">레이어 모듈</th>
-                        <th style="width: 35%;">파라미터 수 공식</th>
-                        <th style="width: 40%;">해설 및 예시</th>
+                        <th style="min-width: 150px;">레이어 모듈</th>
+                        <th style="min-width: 220px;">파라미터 수 공식</th>
+                        <th style="min-width: 240px;">해설 및 예시</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -519,8 +517,8 @@
                         <td><code>(in × out) + out</code></td>
                         <td>
                             • 가중치: \(\text{in} \times \text{out}\)<br>
-                            • 편향: 출력 노드당 1개씩 총 \(\text{out}\)개[span_38](start_span)[span_38](end_span)<br>
-                            예: <code>Linear(64, 6)</code> \(\rightarrow 390\)개[span_39](start_span)[span_39](end_span)
+                            • 편향: 출력 노드당 1개씩 총 \(\text{out}\)개<br>
+                            예: <code>Linear(64, 6)</code> \(\rightarrow 390\)개
                         </td>
                     </tr>
                     <tr>
@@ -528,19 +526,19 @@
                         <td><code>C_out × (C_in × K_h × K_w + 1)</code></td>
                         <td>
                             • 필터 1개가 입력 채널 전체(\(C_{\text{in}}\)) 처리<br>
-                            • 필터 1개당 편향 1개 추가[span_40](start_span)[span_40](end_span)<br>
-                            예: <code>Conv2d(1, 4, 3)</code> \(\rightarrow 40\)개[span_41](start_span)[span_41](end_span)
+                            • 필터 1개당 편향 1개 추가<br>
+                            예: <code>Conv2d(1, 4, 3)</code> \(\rightarrow 40\)개
                         </td>
                     </tr>
                     <tr>
                         <td><code>nn.MaxPool2d / AvgPool2d</code></td>
                         <td><strong>0 개</strong></td>
-                        <td>단순 최댓값/평균값 추출 연산으로 파라미터 없음[span_42](start_span)[span_42](end_span)</td>
+                        <td>단순 최댓값/평균값 추출 연산으로 파라미터 없음</td>
                     </tr>
                     <tr>
                         <td><code>nn.Flatten / nn.ReLU</code></td>
                         <td><strong>0 개</strong></td>
-                        <td>텐서 차원 변경 및 활성화 연산만 수행하므로 파라미터 없음[span_43](start_span)[span_43](end_span)</td>
+                        <td>텐서 차원 변경 및 활성화 연산만 수행하므로 파라미터 없음</td>
                     </tr>
                 </tbody>
             </table>
@@ -549,8 +547,8 @@
         <h3>3) 모델 일반화 (Generalization) & 과적합 방지 기법</h3>
         <div class="concept-card">
             <ul>
-                <li><strong>과적합 (Overfitting):</strong> 훈련 데이터에 과도하게 맞춰져 훈련 손실은 매우 낮으나, 새로운 테스트 데이터에 대한 일반화 오차가 커지는 현상[span_44](start_span)[span_44](end_span).</li>
-                <li><strong>과소적합 (Underfitting):</strong> 모델의 복잡도(용량)가 너무 부족하여 훈련 데이터의 기본 패턴조차 학습하지 못한 현상[span_45](start_span)[span_45](end_span).</li>
+                <li><strong>과적합 (Overfitting):</strong> 훈련 데이터에 과도하게 맞춰져 훈련 손실은 매우 낮으나, 새로운 테스트 데이터에 대한 일반화 오차가 커지는 현상.</li>
+                <li><strong>과소적합 (Underfitting):</strong> 모델의 복잡도(용량)가 너무 부족하여 훈련 데이터의 기본 패턴조차 학습하지 못한 현상.</li>
                 <li><strong>규제화 기법 (Regularization):</strong>
                     <ul>
                         <li><strong>드롭아웃 (Dropout):</strong> 학습 시 무작위로 일부 뉴런을 비활성화하여 특정 뉴런에 대한 과도한 의존을 차단.</li>
@@ -568,9 +566,9 @@
         <div class="highlight">
             <strong>🎯 중간고사 출제 핵심 가이드라인</strong>
             <ul>
-                <li><strong>손계산 위주 (계산기 미사용):</strong> 복잡한 부동소수점 없이 손으로 계산 가능한 정수/간단 분수 위주 출제[span_46](start_span)[span_46](end_span).</li>
-                <li><strong>손코딩 미출제:</strong> 코드를 직접 작성하는 문제는 없으며, PyTorch 코드를 독해하여 파라미터 수나 Shape을 계산하는 문제 출제[span_47](start_span)[span_47](end_span).</li>
-                <li><strong>배제 사항:</strong> Viser 3D 시각화, 도구 설치 및 실습 문법, VGG/ResNet/오토인코더 등 응용 아키텍처 제외[span_48](start_span)[span_48](end_span).</li>
+                <li><strong>손계산 위주 (계산기 미사용):</strong> 복잡한 부동소수점 없이 손으로 계산 가능한 정수/간단 분수 위주 출제.</li>
+                <li><strong>손코딩 미출제:</strong> 코드를 직접 작성하는 문제는 없으며, PyTorch 코드를 독해하여 파라미터 수나 Shape을 계산하는 문제 출제.</li>
+                <li><strong>배제 사항:</strong> Viser 3D 시각화, 도구 설치 및 실습 문법, VGG/ResNet/오토인코더 등 응용 아키텍처 제외.</li>
             </ul>
         </div>
 
@@ -579,43 +577,42 @@
             <table>
                 <thead>
                     <tr>
-                        <th style="width: 25%;">유형</th>
-                        <th style="width: 18%;">과제 문항</th>
-                        <th style="width: 57%;">핵심 풀이 요령 및 체크포인트</th>
+                        <th style="min-width: 140px;">유형</th>
+                        <th style="min-width: 110px;">과제 문항</th>
+                        <th style="min-width: 320px;">핵심 풀이 요령 및 체크포인트</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td>1. 개념 서술/비교</td>
                         <td>1 ~ 3번</td>
-                        <td>규칙 기반 vs ML vs DL 특징, 지도/비지도/강화학습 차이 명확히 숙지[span_49](start_span)[span_49](end_span)</td>
+                        <td>규칙 기반 vs ML vs DL 특징, 지도/비지도/강화학습 차이 명확히 숙지</td>
                     </tr>
                     <tr>
                         <td>2. 선형회귀 1회 업데이트</td>
                         <td>4 ~ 6번</td>
-                        <td>순전파 \(\hat{y} = wx + b\) \(\rightarrow\) \(\frac{\partial L}{\partial w} = 2(\hat{y}-t)x\) \(\rightarrow\) \(w - \eta \frac{\partial L}{\partial w}\) 순서로 풀이[span_50](start_span)[span_50](end_span)</td>
+                        <td>순전파 \(\hat{y} = wx + b\) \(\rightarrow\) \(\frac{\partial L}{\partial w} = 2(\hat{y}-t)x\) \(\rightarrow\) \(w - \eta \frac{\partial L}{\partial w}\) 순서로 풀이</td>
                     </tr>
                     <tr>
                         <td>3. 2-2-2 MLP 역전파 손계산</td>
                         <td>7 ~ 9번</td>
-                        <td>은닉 노드 편미분 시 두 출력 노드의 오차 역전파 경로를 반드시 합산할 것[span_51](start_span)[span_51](end_span)</td>
+                        <td>은닉 노드 편미분 시 두 출력 노드의 오차 역전파 경로를 반드시 합산할 것</td>
                     </tr>
                     <tr>
                         <td>4. 파라미터 수 계산</td>
                         <td>10 ~ 12번</td>
-                        <td><code>bias=True</code> 조건 확인, <code>nn.Linear</code>는 \((\text{in}\times\text{out})+\text{out}\), <code>nn.Conv2d</code>는 \((K_h K_w C_{\text{in}} + 1) C_{\text{out}}\)[span_52](start_span)[span_52](end_span)</td>
+                        <td><code>bias=True</code> 조건 확인, <code>nn.Linear</code>는 \((\text{in}\times\text{out})+\text{out}\), <code>nn.Conv2d</code>는 \((K_h K_w C_{\text{in}} + 1) C_{\text{out}}\)</td>
                     </tr>
                     <tr>
                         <td>5. 2D CNN 합성곱 손계산</td>
                         <td>13 ~ 15번</td>
-                        <td>커널을 뒤집지 않고 원소별 곱 후 합산, 마지막에 편향(\(b\)) 가산 잊지 말 것[span_53](start_span)[span_53](end_span)</td>
+                        <td>커널을 뒤집지 않고 원소별 곱 후 합산, 마지막에 편향(\(b\)) 가산 잊지 말 것</td>
                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
 
-    <!-- JavaScript 탭 전환 기능 -->
     <script>
         function openTab(evt, tabName) {
             var i, tabcontent, tablinks;
