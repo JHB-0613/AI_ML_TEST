@@ -4,22 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>AI & 머신러닝 종합 핵심 개념 & 중간고사 가이드</title>
-    
-    <!-- 수식 라이브러리: MathJax 3 ([ ], \( \) 자동 파싱 최적화) -->
-    <script>
-        window.MathJax = {
-            tex: {
-                inlineMath: [['$', '$'], ['\\(', '\\)']],
-                displayMath: [['$$', '$$'], ['[', ']']],
-                processEscapes: true
-            },
-            options: {
-                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-            }
-        };
-    </script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-
+    <!-- KaTeX 수식 라이브러리 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"
+            onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\\\[', right: '\\\\]', display: true},
+                {left: '\\\\(', right: '\\\\)', display: false},
+                {left: '$', right: '$', display: false}
+            ],
+            throwOnError: false
+        });"></script>
     <style>
         :root {
             --primary: #1a73e8;
@@ -56,6 +53,7 @@
             word-break: keep-all;
         }
         
+        /* 탭 네비게이션: 모바일 가로 스크롤 */
         .nav-tabs-wrapper {
             position: sticky;
             top: 0;
@@ -103,6 +101,7 @@
             box-shadow: 0 2px 6px rgba(26,115,232,0.35); 
         }
 
+        /* 탭 콘텐츠 */
         .tabcontent { 
             display: none; 
             background: var(--card-bg); 
@@ -146,11 +145,11 @@
         .formula-box { 
             background: #f8fafd; 
             border: 1px solid #d2e3fc; 
-            padding: 14px 16px; 
+            padding: 12px 16px; 
             border-radius: 8px; 
             color: #174ea6; 
             margin: 14px 0; 
-            font-size: 1.05em; 
+            font-size: 1.02em; 
             overflow-x: auto; 
             -webkit-overflow-scrolling: touch;
             text-align: center;
@@ -173,6 +172,7 @@
             word-break: keep-all;
         }
         
+        /* 모바일 테이블 세로 1자 쪼개짐 방지 스타일 */
         .table-wrapper {
             width: 100%;
             overflow-x: auto;
@@ -194,9 +194,9 @@
             padding: 12px 14px; 
             text-align: left; 
             vertical-align: middle;
-            word-break: keep-all;
+            word-break: keep-all; 
             line-height: 1.5;
-            min-width: 130px; 
+            min-width: 130px; /* 열 축소 방지 */
         }
         th { 
             background-color: #f1f3f4; 
@@ -208,6 +208,7 @@
             background-color: #f8f9fa; 
         }
 
+        /* 첫 번째 열 강조 및 최소 너비 확보 */
         td:first-child {
             font-weight: 600;
             white-space: nowrap;
@@ -243,7 +244,7 @@
                 font-size: 0.84em; 
             }
             .formula-box { 
-                font-size: 0.95em; 
+                font-size: 0.92em; 
                 padding: 10px 12px; 
             }
         }
@@ -253,6 +254,7 @@
 
     <h1>AI & 머신러닝 종합 요약 & 중간고사 가이드</h1>
 
+    <!-- 상단 주차 선택 버튼 -->
     <div class="nav-tabs-wrapper">
         <div class="nav-tabs">
             <button class="tabbtn active" onclick="openTab(event, 'week1')">1주: AI·ML 개요</button>
@@ -617,6 +619,7 @@
         </div>
     </div>
 
+    <!-- JavaScript 탭 전환 기능 -->
     <script>
         function openTab(evt, tabName) {
             var i, tabcontent, tablinks;
@@ -628,16 +631,9 @@
             for (i = 0; i < tablinks.length; i++) {
                 tablinks[i].className = tablinks[i].className.replace(" active", "");
             }
-            
-            var currentTab = document.getElementById(tabName);
-            currentTab.style.display = "block";
+            document.getElementById(tabName).style.display = "block";
             evt.currentTarget.className += " active";
             
-            // 탭 열릴 때 숨겨져 있던 수식 렌더링 동기화
-            if (window.MathJax && window.MathJax.typesetPromise) {
-                window.MathJax.typesetPromise([currentTab]);
-            }
-
             window.scrollTo({
                 top: 0,
                 behavior: 'smooth'
