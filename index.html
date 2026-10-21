@@ -4,17 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>AI & 머신러닝 종합 핵심 개념 & 중간고사 가이드</title>
-    <!-- KaTeX 수식 라이브러리 -->
+    <!-- KaTeX CSS & JS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"
-            onload="renderMathInElement(document.body, {
-            delimiters: [
-                {left: '[', right: ']', display: true},
-                {left: '\\(', right: '\\)', display: false}
-            ],
-            throwOnError: false
-        });"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
     <style>
         :root {
             --primary: #1a73e8;
@@ -141,13 +134,14 @@
         .formula-box { 
             background: #f8fafd; 
             border: 1px solid #d2e3fc; 
-            padding: 12px 16px; 
+            padding: 14px 16px; 
             border-radius: 8px; 
             color: #174ea6; 
             margin: 14px 0; 
-            font-size: 1.02em; 
+            font-size: 1.05em; 
             overflow-x: auto; 
             -webkit-overflow-scrolling: touch;
+            text-align: center;
         }
         
         .concept-card { 
@@ -167,7 +161,6 @@
             word-break: keep-all;
         }
         
-        /* 테이블 세로 분절 방지 최적화 */
         .table-wrapper {
             width: 100%;
             overflow-x: auto;
@@ -181,7 +174,7 @@
             width: 100%; 
             border-collapse: collapse; 
             font-size: 0.88em; 
-            min-width: 680px; /* 전체 최소 너비 확장 */
+            min-width: 680px; 
             table-layout: auto;
         }
         th, td { 
@@ -191,7 +184,7 @@
             vertical-align: middle;
             word-break: keep-all;
             line-height: 1.5;
-            min-width: 130px; /* 셀별 최소 너비 보장: 1자 압축 차단 */
+            min-width: 130px; 
         }
         th { 
             background-color: #f1f3f4; 
@@ -203,7 +196,6 @@
             background-color: #f8f9fa; 
         }
 
-        /* 1열 및 핵심 설명 열 너비 균형 조정 */
         td:first-child {
             font-weight: 600;
             white-space: nowrap;
@@ -239,7 +231,7 @@
                 font-size: 0.84em; 
             }
             .formula-box { 
-                font-size: 0.92em; 
+                font-size: 0.95em; 
                 padding: 10px 12px; 
             }
         }
@@ -614,6 +606,29 @@
     </div>
 
     <script>
+        function renderAllMath() {
+            if (typeof renderMathInElement === "function") {
+                renderMathInElement(document.body, {
+                    delimiters: [
+                        {left: '$$', right: '$$', display: true},
+                        {left: '[', right: ']', display: true},
+                        {left: '\\(', right: '\\)', display: false},
+                        {left: '$', right: '$', display: false}
+                    ],
+                    throwOnError: false
+                });
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            renderAllMath();
+        });
+
+        // 스크립트 지연 로드 대비 보조 실행
+        window.addEventListener("load", function() {
+            renderAllMath();
+        });
+
         function openTab(evt, tabName) {
             var i, tabcontent, tablinks;
             tabcontent = document.getElementsByClassName("tabcontent");
@@ -624,9 +639,14 @@
             for (i = 0; i < tablinks.length; i++) {
                 tablinks[i].className = tablinks[i].className.replace(" active", "");
             }
-            document.getElementById(tabName).style.display = "block";
+            
+            var currentTab = document.getElementById(tabName);
+            currentTab.style.display = "block";
             evt.currentTarget.className += " active";
             
+            // 탭 전환 시 새로 표시된 요소 수식 렌더링
+            renderAllMath();
+
             window.scrollTo({
                 top: 0,
                 behavior: 'smooth'
